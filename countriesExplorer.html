@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./countriesExplorer.css">
+    <link rel="shortcut icon" href="./image.png" type="image/x-icon">
+    <title>Countries Explorer</title>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>Countries Explorer 🌍</h1>
+        </header>
+
+        <div class="filters interaction">
+            <input type="text" id="search" class="search-input" placeholder="Search a country...">
+            <select name="region" id="region" class="select"></select>
+            <select name="language" id="language" class="select"></select>
+            <select name="population" id="population" class="select"></select>
+        </div>
+
+        <div id="countries" class="countries-container"></div>
+    </div>
+
+    <script src="./countriesExplorer.js"></script>
+</body>
+
+</html>

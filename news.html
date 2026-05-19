@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualités du Monde - GeoGenius 📰</title>
+    <!-- Google Fonts - Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./pages.css">
+    <link rel="shortcut icon" href="./image.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Transition Overlay -->
+    <div class="transition-overlay"></div>
+
+    <!-- Header bar -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-earth-americas"></i>
+                <span>Geo<span>Genius</span></span>
+            </a>
+            
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="news.html" class="nav-link active">Actualités</a>
+                <a href="about.html" class="nav-link">À propos</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="countriesExplorer.html" class="action-btn">
+                    <span>Explorer</span>
+                    <i class="fa-solid fa-compass"></i>
+                </a>
+                <button class="menu-trigger" id="menu-open" aria-label="Ouvrir le menu">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Drawer -->
+    <div class="menu-drawer" id="menu-drawer">
+        <div class="drawer-overlay" id="drawer-overlay"></div>
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <div class="drawer-logo">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <span>GeoGenius</span>
+                </div>
+                <button class="drawer-close" id="menu-close" aria-label="Fermer le menu">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <nav class="drawer-nav">
+                <div class="nav-section">
+                    <h3><i class="fa-solid fa-folder-open"></i> Catégories d'informations</h3>
+                    <ul>
+                        <li><a href="news.html"><i class="fa-regular fa-newspaper"></i> Actualités / Blog</a></li>
+                        <li><a href="news.html?cat=analyses"><i class="fa-solid fa-chart-line"></i> Analyses & Chroniques</a></li>
+                        <li><a href="countriesExplorer.html"><i class="fa-solid fa-map-location-dot"></i> Médiathèque (Pays & Drapeaux)</a></li>
+                        <li><a href="news.html?cat=evenements"><i class="fa-regular fa-calendar-days"></i> Événements mondiaux</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fa-solid fa-users-gear"></i> À propos & Identité</h3>
+                    <ul>
+                        <li><a href="about.html"><i class="fa-regular fa-address-card"></i> Qui sommes-nous ?</a></li>
+                        <li><a href="about.html#mission"><i class="fa-solid fa-bullseye"></i> Notre Mission</a></li>
+                        <li><a href="about.html#organisation"><i class="fa-solid fa-sitemap"></i> Notre Organisation</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fa-solid fa-envelope-open-text"></i> Contact & Partenariats</h3>
+                    <ul>
+                        <li><a href="contact.html"><i class="fa-solid fa-pen-to-square"></i> Nous Contacter</a></li>
+                        <li><a href="contact.html#sponsors"><i class="fa-solid fa-handshake"></i> Devenir Partenaire</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="drawer-footer">
+                <p>GeoGenius © 2026. Tous droits réservés.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Small Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Actualités du Globe</h1>
+            <p>Découvrez nos chroniques, analyses démographiques, récits insolites de géographie et rapports d'actualité internationale.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+        <!-- Filtres catégories -->
+        <div class="news-filters">
+            <button class="filter-chip active" data-filter="all">Tout</button>
+            <button class="filter-chip" data-filter="insolite">Insolite</button>
+            <button class="filter-chip" data-filter="demographie">Démographie</button>
+            <button class="filter-chip" data-filter="geographie">Géographie</button>
+            <button class="filter-chip" data-filter="analyses">Analyses</button>
+            <button class="filter-chip" data-filter="evenements">Événements</button>
+        </div>
+
+        <!-- Grille d'articles -->
+        <div class="news-list-grid">
+            <!-- Article Une -->
+            <article class="news-card" data-cat="analyses">
+                <div class="card-img-wrapper">
+                    <span class="card-badge warning">Analyses</span>
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" alt="Vue satellite" class="card-image">
+                </div>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span><i class="fa-regular fa-calendar"></i> 19 Mai 2026</span>
+                        <span><i class="fa-regular fa-user"></i> Caleb K.</span>
+                    </div>
+                    <h4>Le mystère des pays sans capitale officielle</h4>
+                    <p class="card-excerpt">Si la majorité des nations du globe possèdent une capitale bien établie, certains territoires font exception. Enquête sur ces pays atypiques.</p>
+                    <a href="#" class="card-link" onclick="alert('Article en cours de rédaction !'); return false;">Lire la suite <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Article 1 -->
+            <article class="news-card" data-cat="insolite">
+                <div class="card-img-wrapper">
+                    <span class="card-badge info">Insolite</span>
+                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=500&auto=format&fit=crop" alt="Taj Mahal" class="card-image">
+                </div>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span><i class="fa-regular fa-calendar"></i> 18 Mai 2026</span>
+                        <span><i class="fa-regular fa-user"></i> Rédaction</span>
+                    </div>
+                    <h4>Top 5 des capitales les plus élevées au monde</h4>
+                    <p class="card-excerpt">De La Paz en Bolivie à Quito en Équateur, prenez de la hauteur et découvrez ces centres administratifs perchés à des altitudes record.</p>
+                    <a href="#" class="card-link" onclick="alert('Article en cours de rédaction !'); return false;">Lire la suite <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="news-card" data-cat="demographie">
+                <div class="card-img-wrapper">
+                    <span class="card-badge success">Démographie</span>
+                    <img src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=500&auto=format&fit=crop" alt="Foule urbaine" class="card-image">
+                </div>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span><i class="fa-regular fa-calendar"></i> 17 Mai 2026</span>
+                        <span><i class="fa-regular fa-user"></i> Analyse</span>
+                    </div>
+                    <h4>Le cap des 8 milliards d'habitants : quels impacts ?</h4>
+                    <p class="card-excerpt">Analyse démographique des grandes puissances mondiales et des mutations de population en Afrique et en Asie pour les décennies à venir.</p>
+                    <a href="#" class="card-link" onclick="alert('Article en cours de rédaction !'); return false;">Lire la suite <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="news-card" data-cat="geographie">
+                <div class="card-img-wrapper">
+                    <span class="card-badge primary">Géographie</span>
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=500&auto=format&fit=crop" alt="Îles tropicales" class="card-image">
+                </div>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span><i class="fa-regular fa-calendar"></i> 15 Mai 2026</span>
+                        <span><i class="fa-regular fa-user"></i> Culture</span>
+                    </div>
+                    <h4>Archipels et micro-nations : souveraineté sur l'océan</h4>
+                    <p class="card-excerpt">Comment de minuscules territoires insulaires luttent pour préserver leur culture et leur statut de nation face aux défis environnementaux modernes.</p>
+                    <a href="#" class="card-link" onclick="alert('Article en cours de rédaction !'); return false;">Lire la suite <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="news-card" data-cat="evenements">
+                <div class="card-img-wrapper">
+                    <span class="card-badge warning">Événements</span>
+                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=500&auto=format&fit=crop" alt="Sommet géopolitique" class="card-image">
+                </div>
+                <div class="card-body">
+                    <div class="card-meta">
+                        <span><i class="fa-regular fa-calendar"></i> 12 Mai 2026</span>
+                        <span><i class="fa-regular fa-user"></i> Diplomatie</span>
+                    </div>
+                    <h4>Le Sommet Global de la Biodiversité 2026</h4>
+                    <p class="card-excerpt">Retour sur les grandes résolutions prises par les États membres lors du dernier congrès pour la sauvegarde des réserves naturelles mondiales.</p>
+                    <a href="#" class="card-link" onclick="alert('Article en cours de rédaction !'); return false;">Lire la suite <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <span>Geo<span>Genius</span></span>
+                </a>
+                <p>Un portail éducatif et d'informations géographiques pour découvrir la richesse et la diversité culturelle des nations qui partagent notre planète.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Plan du site</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="news.html">Actualités</a></li>
+                    <li><a href="about.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact & Réseaux</h4>
+                <div class="footer-socials">
+                    <a href="https://wa.me/22990000000" target="_blank" class="social-link whatsapp" aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="social-link facebook" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-link instagram" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="mailto:caleb.kpanou@gmail.com" class="social-link gmail" aria-label="Gmail">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+                </div>
+                <p class="email-display"><i class="fa-regular fa-envelope"></i> caleb.kpanou@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>GeoGenius © 2026. Fait avec passion pour la géographie mondiale. Données provenant de REST Countries.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP Core Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Code JavaScript principal -->
+    <script src="./index.js"></script>
+
+    <!-- Inline Filter Logic -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const chips = document.querySelectorAll(".filter-chip");
+            const cards = document.querySelectorAll(".news-card");
+
+            const filterCategory = (cat) => {
+                chips.forEach(c => {
+                    if (c.getAttribute("data-filter") === cat) {
+                        c.classList.add("active");
+                    } else {
+                        c.classList.remove("active");
+                    }
+                });
+
+                cards.forEach(card => {
+                    const cardCat = card.getAttribute("data-cat");
+                    if (cat === "all" || cardCat === cat) {
+                        card.style.display = "flex";
+                        gsap.fromTo(card, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4 });
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            };
+
+            // Filtrage via clic
+            chips.forEach(chip => {
+                chip.addEventListener("click", () => {
+                    const filter = chip.getAttribute("data-filter");
+                    filterCategory(filter);
+                });
+            });
+
+            // Filtrage via paramètre d'URL (?cat=analyses)
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialCat = urlParams.get("cat");
+            if (initialCat) {
+                filterCategory(initialCat);
+            }
+        });
+    </script>
+</body>
+
+</html>

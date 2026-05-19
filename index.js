@@ -1,135 +1,189 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. ANIMATION D'ENTRÉE DES DRAPEAUX FLOTTANTS
-    gsap.fromTo(".floating-item", 
-        { 
-            scale: 0, 
-            opacity: 0,
-            y: 50 
-        }, 
+    // Regrouper l'enregistrement de ScrollTrigger
+    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
+    }
+
+    // ==========================================================================
+    // 1. MENU DRAWER (OUVERTURE/FERMETURE)
+    // ==========================================================================
+    const menuOpenBtn = document.getElementById("menu-open");
+    const menuCloseBtn = document.getElementById("menu-close");
+    const menuDrawer = document.getElementById("menu-drawer");
+    const drawerOverlay = document.getElementById("drawer-overlay");
+
+    const openMenu = () => {
+        menuDrawer.classList.add("open");
+        // Animation GSAP pour l'ouverture
+        gsap.fromTo(".drawer-content", 
+            { x: "100%" }, 
+            { x: "0%", duration: 0.5, ease: "power4.out" }
+        );
+        gsap.fromTo(".nav-section", 
+            { x: 30, opacity: 0 }, 
+            { x: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: "power2.out", delay: 0.15 }
+        );
+    };
+
+    const closeMenu = () => {
+        gsap.to(".drawer-content", {
+            x: "100%",
+            duration: 0.4,
+            ease: "power4.in",
+            onComplete: () => {
+                menuDrawer.classList.remove("open");
+            }
+        });
+    };
+
+    if (menuOpenBtn) menuOpenBtn.addEventListener("click", openMenu);
+    if (menuCloseBtn) menuCloseBtn.addEventListener("click", closeMenu);
+    if (drawerOverlay) drawerOverlay.addEventListener("click", closeMenu);
+
+    // ==========================================================================
+    // 2. ANIMATIONS D'ENTRÉE GSAP (PAGE D'ACCUEIL)
+    // ==========================================================================
+    const mainTl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+    // En-tête (Header)
+    mainTl.fromTo(".main-header", 
+        { y: -80, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 1 }
+    );
+
+    // Titres héro
+    mainTl.fromTo(".hero-title .text-slide",
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2, stagger: 0.15 },
+        "-=0.6"
+    );
+
+    // Sous-titre héro
+    mainTl.fromTo(".hero-subtitle",
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1 },
+        "-=0.7"
+    );
+
+    // Boutons héro
+    mainTl.fromTo(".hero-ctas .hero-btn",
+        { y: 20, opacity: 0, scale: 0.95 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.12 },
+        "-=0.7"
+    );
+
+    // ==========================================================================
+    // 3. ENTRÉE DES DRAPEAUX FLOTTANTS ET MOUVEMENT CONTINU
+    // ==========================================================================
+    const flags = document.querySelectorAll(".flag-item");
+    
+    gsap.fromTo(".flag-item", 
+        { scale: 0, opacity: 0, y: 30 },
         { 
             scale: 1, 
-            opacity: 0.6, 
+            opacity: 0.35, 
             y: 0, 
-            duration: 1.2, 
+            duration: 1.5, 
             stagger: 0.1, 
             ease: "back.out(1.5)",
-            onComplete: startFloatingAnimations
+            onComplete: startFloatingFlags
         }
     );
 
-    // 2. TIMELINE D'ENTRÉE POUR LA CARTE CENTRALE
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-    tl.fromTo(".glass-card", 
-        { scale: 0.85, opacity: 0, y: 60 },
-        { scale: 1, opacity: 1, y: 0, duration: 1.4, ease: "power4.out" }
-    );
-
-    tl.fromTo(".globe-icon",
-        { scale: 0, rotation: -180 },
-        { scale: 1, rotation: 0, duration: 1, ease: "back.out(1.7)" },
-        "-=0.8"
-    );
-
-    // Animation séquencée du titre par mot
-    tl.fromTo(".main-title .word",
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "back.out(1.7)" },
-        "-=0.6"
-    );
-
-    tl.fromTo(".tagline",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        "-=0.6"
-    );
-
-    tl.fromTo(".description",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        "-=0.5"
-    );
-
-    tl.fromTo(".feature-item",
-        { y: 30, opacity: 0, scale: 0.9 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.12, ease: "power3.out" },
-        "-=0.6"
-    );
-
-    tl.fromTo(".cta-wrapper",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        "-=0.5"
-    );
-
-    tl.fromTo(".landing-footer",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 },
-        "-=0.6"
-    );
-
-    // 3. ANIMATION DE FLOTTEMENT CONTINU (YOYO INFINI)
-    function startFloatingAnimations() {
-        const items = document.querySelectorAll(".floating-item");
-        items.forEach((item, index) => {
-            // Mouvement de translation aléatoire
-            gsap.to(item, {
-                y: "random(-25, 25)",
+    function startFloatingFlags() {
+        flags.forEach((flag, idx) => {
+            gsap.to(flag, {
+                y: "random(-30, 30)",
                 x: "random(-20, 20)",
-                rotation: "random(-20, 20)",
-                duration: "random(4, 7)",
+                rotation: "random(-15, 15)",
+                duration: "random(4.5, 7)",
                 repeat: -1,
                 yoyo: true,
                 ease: "sine.inOut",
-                delay: index * 0.15
+                delay: idx * 0.2
             });
         });
     }
 
-    // 4. TRANSITION DE SORTIE AU CLIC SUR LE BOUTON
-    const startBtn = document.getElementById("start-btn");
-    startBtn.addEventListener("click", () => {
-        // Timeline de sortie
-        const exitTl = gsap.timeline({
-            onComplete: () => {
-                // Redirection vers la page de l'explorateur
-                window.location.href = "./countriesExplorer.html";
+    // ==========================================================================
+    // 4. ANIMATION DES CHIFFRES CLÉS (STATS) AU DEFILEMENT
+    // ==========================================================================
+    const statBoxes = document.querySelectorAll(".stat-box");
+    
+    if (statBoxes.length > 0 && typeof ScrollTrigger !== "undefined") {
+        statBoxes.forEach((box) => {
+            const numEl = box.querySelector(".stat-number");
+            const target = parseInt(numEl.getAttribute("data-target"), 10);
+            
+            gsap.fromTo(numEl, 
+                { textContent: 0 },
+                {
+                    textContent: target,
+                    duration: 2.2,
+                    ease: "power2.out",
+                    snap: { textContent: 1 },
+                    scrollTrigger: {
+                        trigger: box,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        });
+    }
+
+    // ==========================================================================
+    // 5. ANIMATIONS SCROLLTRIGGER POUR LES ARTICLES
+    // ==========================================================================
+    if (typeof ScrollTrigger !== "undefined") {
+        // Entrée de la carte "La Une"
+        gsap.fromTo(".featured-card", 
+            { y: 50, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                scrollTrigger: {
+                    trigger: ".featured-card",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            }
+        );
+
+        // Entrée en cascade de la grille d'articles
+        gsap.fromTo(".news-card", 
+            { y: 40, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.15,
+                scrollTrigger: {
+                    trigger: ".news-grid",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            }
+        );
+    }
+
+    // ==========================================================================
+    // 6. LIENS DE TRANSITIONS DE PAGES SEAMLESS (FONDUS)
+    // ==========================================================================
+    const transitionLinks = document.querySelectorAll("a:not([target='_blank']):not([href^='#'])");
+    
+    transitionLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            const href = link.getAttribute("href");
+            if (href && href !== "#") {
+                e.preventDefault();
+                // Activation du rideau noir
+                document.body.classList.add("transition-active");
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600);
             }
         });
-
-        // Ajouter la classe de transition pour activer le fondu au noir
-        document.body.classList.add("transition-active");
-
-        exitTl.to(".glass-card", {
-            scale: 0.9,
-            opacity: 0,
-            y: -30,
-            duration: 0.6,
-            ease: "power3.in"
-        });
-
-        exitTl.to(".landing-footer", {
-            opacity: 0,
-            y: 20,
-            duration: 0.5,
-            ease: "power2.in"
-        }, "-=0.5");
-
-        exitTl.to(".floating-item", {
-            scale: 0.5,
-            opacity: 0,
-            x: (i, el) => {
-                // Éjecter les éléments vers les extérieurs
-                const rect = el.getBoundingClientRect();
-                return rect.left < window.innerWidth / 2 ? -150 : 150;
-            },
-            y: (i, el) => {
-                const rect = el.getBoundingClientRect();
-                return rect.top < window.innerHeight / 2 ? -150 : 150;
-            },
-            duration: 0.6,
-            stagger: 0.05,
-            ease: "power2.in"
-        }, "-=0.5");
     });
 });

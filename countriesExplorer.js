@@ -17,7 +17,7 @@ const populationOptionsContainer = document.getElementById("select-population-op
 const populationContainer = document.getElementById("select-population-container");
 
 // URL de l'API REST Countries
-const URL = `https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,population,flags,languages,currencies`;
+const URL = `https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,population,flags,languages,currencies,cca2,maps`;
 
 // État global de l'application
 let countries = [];
@@ -222,7 +222,7 @@ function applyFilters() {
         // 1. Filtre textuel (Nom du pays ou sa capitale)
         const nameCommon = (c.name?.common || "").toLowerCase();
         const nameOfficial = (c.name?.official || "").toLowerCase();
-        const capital = (c.capital ? c.capital[0] : "").toLowerCase();
+        const capital = (c.capital && c.capital[0] ? c.capital[0] : "").toLowerCase();
         
         const matchesSearch = !searchValue || 
             nameCommon.includes(searchValue) || 
@@ -273,10 +273,13 @@ function display(table) {
         const popFormatted = c.population.toLocaleString("fr-FR");
         const currencies = c.currencies ? Object.values(c.currencies).map(curr => `${curr.name} (${curr.symbol || ''})`).join(", ") : "N/A";
         const languagesList = c.languages ? Object.values(c.languages).join(", ") : "N/A";
-        const capitalCity = c.capital ? c.capital[0] : "N/A";
+        const capitalCity = c.capital && c.capital[0] ? c.capital[0] : "N/A";
+
+        const cca2Lower = c.cca2 ? c.cca2.toLowerCase() : "";
+        const fallbackFlag = cca2Lower ? `https://flagcdn.com/w320/${cca2Lower}.png` : "";
 
         card.innerHTML = `
-            <img src="${c.flags.png}" alt="Drapeau de ${c.name.common}" class="image" loading="lazy">
+            <img src="${c.flags.png}" onerror="this.onerror=null; this.src='${fallbackFlag}';" alt="Drapeau de ${c.name.common}" class="image" loading="lazy">
             <div class="details">
                 <h1>${c.name.common}</h1>
                 <h2>Capitale : ${capitalCity}</h2>
@@ -290,7 +293,7 @@ function display(table) {
 
         // Ouverture de l'overlay au clic
         card.addEventListener("click", () => {
-            openOverlay(c, card);
+            openOverlay(c);
         });
 
         countriesContainer.appendChild(card);
@@ -298,7 +301,7 @@ function display(table) {
 }
 
 // Création et affichage de la fenêtre modale (Overlay)
-function openOverlay(country, cardNode) {
+function openOverlay(c) {
     // Application de l'effet flou en arrière-plan
     monFirst.classList.add("blur");
 
@@ -306,34 +309,73 @@ function openOverlay(country, cardNode) {
     const overlay = document.createElement("div");
     overlay.className = "overlay";
 
-    // Cloner la carte et lui affecter le style modal dédié
-    const clone = cardNode.cloneNode(true);
-    clone.classList.add("overlay-card");
+    // Formater les données pour l'affichage
+    const popFormatted = c.population.toLocaleString("fr-FR");
+    const currencies = c.currencies ? Object.values(c.currencies).map(curr => `${curr.name} (${curr.symbol || ''})`).join(", ") : "N/A";
+    const languagesList = c.languages ? Object.values(c.languages).join(", ") : "N/A";
+    const capitalCity = c.capital && c.capital[0] ? c.capital[0] : "N/A";
+    const cca2Lower = c.cca2 ? c.cca2.toLowerCase() : "";
+    const flagUrl = c.flags.png;
+    const fallbackFlag = cca2Lower ? `https://flagcdn.com/w320/${cca2Lower}.png` : "";
 
-    // Bouton de fermeture
-    const closeBtn = document.createElement("button");
-    closeBtn.className = "close";
-    closeBtn.setAttribute("aria-label", "Fermer");
-    closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    overlay.innerHTML = `
+        <div class="overlay-card">
+            <button class="close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+            <img src="${flagUrl}" onerror="this.onerror=null; this.src='${fallbackFlag}';" alt="Drapeau de ${c.name.common}" class="overlay-image">
+            <div class="overlay-details">
+                <h1>${c.name.common}</h1>
+                <h2>${c.name.official || c.name.common}</h2>
+                
+                <div class="details-grid">
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-landmark"></i> Capitale</span>
+                        <span class="detail-value">${capitalCity}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-earth-americas"></i> Continent</span>
+                        <span class="detail-value">${c.region}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-map-location-dot"></i> Sous-région</span>
+                        <span class="detail-value">${c.subregion || "N/A"}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-users"></i> Population</span>
+                        <span class="detail-value">${popFormatted}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-language"></i> Langues</span>
+                        <span class="detail-value">${languagesList}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-coins"></i> Monnaie</span>
+                        <span class="detail-value">${currencies}</span>
+                    </div>
+                </div>
+
+                ${c.maps && c.maps.googleMaps ? `
+                <a href="${c.maps.googleMaps}" target="_blank" class="maps-btn">
+                    <i class="fa-solid fa-location-dot"></i> Voir sur Google Maps
+                </a>` : ''}
+            </div>
+        </div>
+    `;
 
     // Fonction de fermeture avec animation fluide
     const closeOverlay = () => {
         monFirst.classList.remove("blur");
-        overlay.style.opacity = "0";
-        overlay.style.transition = "opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1)";
+        overlay.classList.add("closing");
         setTimeout(() => {
             overlay.remove();
-        }, 300);
+        }, 400);
     };
 
     // Événements de fermeture (clic sur le fond ou sur le bouton)
     overlay.addEventListener("click", e => {
         if (e.target === overlay) closeOverlay();
     });
-    closeBtn.addEventListener("click", closeOverlay);
+    overlay.querySelector(".close").addEventListener("click", closeOverlay);
 
     // Assemblage et affichage
-    overlay.appendChild(clone);
-    overlay.appendChild(closeBtn);
     document.body.appendChild(overlay);
 }

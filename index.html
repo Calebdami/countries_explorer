@@ -1,104 +1,309 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GeoGenius - Culture Générale du Monde 🌍</title>
+    <title>GeoGenius - Portail d'Information & Culture du Monde 🌍</title>
     <!-- Google Fonts - Outfit -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Main Style -->
+    <!-- Style main -->
     <link rel="stylesheet" href="./index.css">
     <link rel="shortcut icon" href="./image.png" type="image/x-icon">
 </head>
+
 <body>
-    <!-- Overlay de transition pour le changement de page -->
+    <!-- Transition Overlay -->
     <div class="transition-overlay"></div>
 
-    <!-- Éléments d'arrière-plan interactifs (Drapeaux flottants animés) -->
-    <div class="floating-elements" id="floating-elements">
-        <div class="floating-item item-1">🇫🇷</div>
-        <div class="floating-item item-2">🇯🇵</div>
-        <div class="floating-item item-3">🇧🇷</div>
-        <div class="floating-item item-4">🇨🇦</div>
-        <div class="floating-item item-5">🇪🇬</div>
-        <div class="floating-item item-6">🇦🇺</div>
-        <div class="floating-item item-7">🇿🇦</div>
-        <div class="floating-item item-8">🇮🇳</div>
+    <!-- Header bar -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-earth-americas"></i>
+                <span>Geo<span>Genius</span></span>
+            </a>
+            
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-link active">Accueil</a>
+                <a href="news.html" class="nav-link">Actualités</a>
+                <a href="about.html" class="nav-link">À propos</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="countriesExplorer.html" class="action-btn">
+                    <span>Explorer</span>
+                    <i class="fa-solid fa-compass"></i>
+                </a>
+                <button class="menu-trigger" id="menu-open" aria-label="Ouvrir le menu">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Drawer (Table des Matières) -->
+    <div class="menu-drawer" id="menu-drawer">
+        <div class="drawer-overlay" id="drawer-overlay"></div>
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <div class="drawer-logo">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <span>GeoGenius</span>
+                </div>
+                <button class="drawer-close" id="menu-close" aria-label="Fermer le menu">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <nav class="drawer-nav">
+                <div class="nav-section">
+                    <h3><i class="fa-solid fa-folder-open"></i> Catégories d'informations</h3>
+                    <ul>
+                        <li><a href="news.html"><i class="fa-regular fa-newspaper"></i> Actualités / Blog</a></li>
+                        <li><a href="news.html?cat=analyses"><i class="fa-solid fa-chart-line"></i> Analyses & Chroniques</a></li>
+                        <li><a href="countriesExplorer.html"><i class="fa-solid fa-map-location-dot"></i> Médiathèque (Pays & Drapeaux)</a></li>
+                        <li><a href="news.html?cat=evenements"><i class="fa-regular fa-calendar-days"></i> Événements mondiaux</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fa-solid fa-users-gear"></i> À propos & Identité</h3>
+                    <ul>
+                        <li><a href="about.html"><i class="fa-regular fa-address-card"></i> Qui sommes-nous ?</a></li>
+                        <li><a href="about.html#mission"><i class="fa-solid fa-bullseye"></i> Notre Mission</a></li>
+                        <li><a href="about.html#organisation"><i class="fa-solid fa-sitemap"></i> Notre Organisation</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3><i class="fa-solid fa-envelope-open-text"></i> Contact & Partenariats</h3>
+                    <ul>
+                        <li><a href="contact.html"><i class="fa-solid fa-pen-to-square"></i> Nous Contacter</a></li>
+                        <li><a href="contact.html#sponsors"><i class="fa-solid fa-handshake"></i> Devenir Partenaire</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="drawer-footer">
+                <p>GeoGenius © 2026. Tous droits réservés.</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Conteneur principal de la Landing Page -->
-    <main class="landing-container">
-        <div class="glass-card">
-            <header class="logo-area">
-                <div class="globe-icon">
-                    <i class="fa-solid fa-earth-americas"></i>
-                </div>
-            </header>
+    <!-- Background animél (Drapeaux flottants) -->
+    <div class="floating-flags" id="floating-flags">
+        <div class="flag-item">🇫🇷</div>
+        <div class="flag-item">🇯🇵</div>
+        <div class="flag-item">🇧🇷</div>
+        <div class="flag-item">🇨🇦</div>
+        <div class="flag-item">🇪🇬</div>
+        <div class="flag-item">🇺🇸</div>
+        <div class="flag-item">🇿🇦</div>
+        <div class="flag-item">🇮🇳</div>
+    </div>
 
-            <section class="content-area">
-                <h1 class="main-title" id="main-title">
-                    <span class="word">Geo</span><span class="word highlight">Genius</span>
+    <!-- Main Content -->
+    <main class="page-content">
+        <!-- Section Héros -->
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title" id="hero-title">
+                    <span class="text-slide">Explorez le Monde,</span>
+                    <span class="text-slide highlight">Décryptez les Nations</span>
                 </h1>
-                <p class="tagline">Explorez les nations du monde et testez vos connaissances.</p>
-                <p class="description">
-                    Découvrez des informations clés sur tous les pays : capitales, populations, langues parlées, géographie et monnaies grâce à notre explorateur interactif et intuitif.
-                </p>
+                <p class="hero-subtitle">Votre portail d'actualités mondiales, de géopolitique, de statistiques démographiques et de culture générale.</p>
+                <div class="hero-ctas">
+                    <a href="countriesExplorer.html" class="hero-btn primary-btn">
+                        <span>Lancer l'Explorateur</span>
+                        <i class="fa-solid fa-compass"></i>
+                    </a>
+                    <a href="#featured-section" class="hero-btn secondary-btn">
+                        <span>En savoir plus</span>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-                <!-- Points forts de l'application -->
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <span>Recherche Instantanée</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fa-solid fa-filter"></i>
-                        <span>Filtres Intelligents</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fa-solid fa-expand"></i>
-                        <span>Détails Immersifs</span>
-                    </div>
+        <!-- Section La Une -->
+        <section class="featured-section" id="featured-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="category-badge warning">À la une</span>
+                    <h2>L'information majeure</h2>
                 </div>
 
-                <div class="cta-wrapper">
-                    <button class="cta-button" id="start-btn">
-                        <span>Commencer l'exploration</span>
-                        <i class="fa-solid fa-circle-arrow-right"></i>
-                    </button>
+                <div class="featured-card">
+                    <div class="featured-img-wrapper">
+                        <div class="featured-gradient"></div>
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" alt="Vue satellite de la terre" class="featured-image">
+                    </div>
+                    <div class="featured-info">
+                        <div class="meta-row">
+                            <span class="meta-item"><i class="fa-regular fa-calendar"></i> 19 Mai 2026</span>
+                            <span class="meta-item"><i class="fa-regular fa-clock"></i> 6 min de lecture</span>
+                            <span class="meta-item author"><i class="fa-regular fa-user"></i> Par Caleb K.</span>
+                        </div>
+                        <h3>Le mystère des pays sans capitale officielle</h3>
+                        <p class="summary">
+                            Si la majorité des nations du globe possèdent une capitale bien établie, certains territoires font exception. Entre décentralisation extrême, capitales de facto et absence totale de chef-lieu désigné par la Constitution, découvrez ces nations insolites qui bousculent la géographie politique traditionnelle.
+                        </p>
+                        <a href="news.html?id=1" class="read-more-btn">
+                            <span>Lire l'article complet</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
 
-        <!-- Footer de la Landing Page -->
-        <footer class="landing-footer">
-            <div class="footer-socials">
-                <a href="https://wa.me/22990000000" target="_blank" class="social-link whatsapp" aria-label="WhatsApp">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>
-                <a href="https://facebook.com" target="_blank" class="social-link facebook" aria-label="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="https://instagram.com" target="_blank" class="social-link instagram" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a href="mailto:caleb.kpanou@gmail.com" class="social-link gmail" aria-label="Gmail">
-                    <i class="fa-regular fa-envelope"></i>
-                </a>
+        <!-- Flux des dernières nouveautés (Grille d'articles) -->
+        <section class="news-grid-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-subtitle">Flux d'informations</span>
+                    <h2>Dernières nouveautés</h2>
+                </div>
+
+                <div class="news-grid">
+                    <!-- Article 1 -->
+                    <article class="news-card">
+                        <div class="card-img-wrapper">
+                            <span class="card-badge info">Insolite</span>
+                            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=500&auto=format&fit=crop" alt="Taj Mahal, Inde" class="card-image">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <span><i class="fa-regular fa-calendar"></i> 18 Mai 2026</span>
+                                <span><i class="fa-regular fa-user"></i> Rédaction</span>
+                            </div>
+                            <h4>Top 5 des capitales les plus élevées au monde</h4>
+                            <p class="card-excerpt">De La Paz en Bolivie à Quito en Équateur, prenez de la hauteur et découvrez ces centres administratifs perchés à des altitudes record.</p>
+                            <a href="news.html?id=2" class="card-link">Lire la suite <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Article 2 -->
+                    <article class="news-card">
+                        <div class="card-img-wrapper">
+                            <span class="card-badge success">Démographie</span>
+                            <img src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=500&auto=format&fit=crop" alt="Foule urbaine à Tokyo" class="card-image">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <span><i class="fa-regular fa-calendar"></i> 17 Mai 2026</span>
+                                <span><i class="fa-regular fa-user"></i> Analyse</span>
+                            </div>
+                            <h4>Le cap des 8 milliards d'habitants : quels impacts ?</h4>
+                            <p class="card-excerpt">Analyse démographique des grandes puissances mondiales et des mutations de population en Afrique et en Asie pour les décennies à venir.</p>
+                            <a href="news.html?id=3" class="card-link">Lire la suite <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Article 3 -->
+                    <article class="news-card">
+                        <div class="card-img-wrapper">
+                            <span class="card-badge primary">Géographie</span>
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=500&auto=format&fit=crop" alt="Îles tropicales" class="card-image">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <span><i class="fa-regular fa-calendar"></i> 15 Mai 2026</span>
+                                <span><i class="fa-regular fa-user"></i> Culture</span>
+                            </div>
+                            <h4>Archipels et micro-nations : souveraineté sur l'océan</h4>
+                            <p class="card-excerpt">Comment de minuscules territoires insulaires luttent pour préserver leur culture et leur statut de nation face aux défis environnementaux modernes.</p>
+                            <a href="news.html?id=4" class="card-link">Lire la suite <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
             </div>
-            <div class="footer-info">
-                <span class="info-tag"><i class="fa-solid fa-database"></i> API REST Countries</span>
-                <span class="info-tag"><i class="fa-solid fa-earth-americas"></i> 250 Pays</span>
-                <span class="info-tag"><i class="fa-solid fa-code"></i> GSAP & Outfit Font</span>
+        </section>
+
+        <!-- Bloc Chiffres Clés -->
+        <section class="stats-section">
+            <div class="section-container">
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-icon"><i class="fa-solid fa-globe"></i></div>
+                        <div class="stat-number" data-target="250">0</div>
+                        <div class="stat-label">Pays Répertoriés</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                        <div class="stat-number" data-target="80">0</div>
+                        <div class="stat-label">Milliards d'Humains</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon"><i class="fa-solid fa-language"></i></div>
+                        <div class="stat-number" data-target="7000">0</div>
+                        <div class="stat-label">Langues Parlées</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon"><i class="fa-solid fa-landmark"></i></div>
+                        <div class="stat-number" data-target="195">0</div>
+                        <div class="stat-label">Capitales Mondiales</div>
+                    </div>
+                </div>
             </div>
-            <p class="copyright">Développé par Caleb Kpanou &copy; 2026</p>
-        </footer>
+        </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <span>Geo<span>Genius</span></span>
+                </a>
+                <p>Un portail éducatif et d'informations géographiques pour découvrir la richesse et la diversité culturelle des nations qui partagent notre planète.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Plan du site</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="news.html">Actualités</a></li>
+                    <li><a href="about.html">À propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact & Réseaux</h4>
+                <div class="footer-socials">
+                    <a href="https://wa.me/22990000000" target="_blank" class="social-link whatsapp" aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="social-link facebook" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-link instagram" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="mailto:caleb.kpanou@gmail.com" class="social-link gmail" aria-label="Gmail">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+                </div>
+                <p class="email-display"><i class="fa-regular fa-envelope"></i> caleb.kpanou@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>GeoGenius © 2026. Fait avec passion pour la géographie mondiale. Données provenant de REST Countries.</p>
+        </div>
+    </footer>
 
     <!-- GSAP Core Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <!-- Landing Page Logic -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Code JavaScript principal -->
     <script src="./index.js"></script>
 </body>
+
 </html>

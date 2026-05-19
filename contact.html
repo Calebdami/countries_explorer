@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explorateur des Nations - GeoGenius 🌍</title>
+    <title>Contact & Partenariats - GeoGenius 📞</title>
     <!-- Google Fonts - Outfit -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="./index.css">
-    <link rel="stylesheet" href="./countriesExplorer.css">
+    <link rel="stylesheet" href="./pages.css">
     <link rel="shortcut icon" href="./image.png" type="image/x-icon">
 </head>
 
@@ -26,12 +26,12 @@
                 <i class="fa-solid fa-earth-americas"></i>
                 <span>Geo<span>Genius</span></span>
             </a>
-            
+
             <nav class="desktop-nav">
                 <a href="index.html" class="nav-link">Accueil</a>
                 <a href="news.html" class="nav-link">Actualités</a>
                 <a href="about.html" class="nav-link">À propos</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="contact.html" class="nav-link active">Contact</a>
             </nav>
 
             <div class="header-actions">
@@ -65,9 +65,12 @@
                     <h3><i class="fa-solid fa-folder-open"></i> Catégories d'informations</h3>
                     <ul>
                         <li><a href="news.html"><i class="fa-regular fa-newspaper"></i> Actualités / Blog</a></li>
-                        <li><a href="news.html?cat=analyses"><i class="fa-solid fa-chart-line"></i> Analyses & Chroniques</a></li>
-                        <li><a href="countriesExplorer.html"><i class="fa-solid fa-map-location-dot"></i> Médiathèque (Pays & Drapeaux)</a></li>
-                        <li><a href="news.html?cat=evenements"><i class="fa-regular fa-calendar-days"></i> Événements mondiaux</a></li>
+                        <li><a href="news.html?cat=analyses"><i class="fa-solid fa-chart-line"></i> Analyses &
+                                Chroniques</a></li>
+                        <li><a href="countriesExplorer.html"><i class="fa-solid fa-map-location-dot"></i> Médiathèque
+                                (Pays & Drapeaux)</a></li>
+                        <li><a href="news.html?cat=evenements"><i class="fa-regular fa-calendar-days"></i> Événements
+                                mondiaux</a></li>
                     </ul>
                 </div>
 
@@ -76,7 +79,8 @@
                     <ul>
                         <li><a href="about.html"><i class="fa-regular fa-address-card"></i> Qui sommes-nous ?</a></li>
                         <li><a href="about.html#mission"><i class="fa-solid fa-bullseye"></i> Notre Mission</a></li>
-                        <li><a href="about.html#organisation"><i class="fa-solid fa-sitemap"></i> Notre Organisation</a></li>
+                        <li><a href="about.html#organisation"><i class="fa-solid fa-sitemap"></i> Notre Organisation</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -84,7 +88,8 @@
                     <h3><i class="fa-solid fa-envelope-open-text"></i> Contact & Partenariats</h3>
                     <ul>
                         <li><a href="contact.html"><i class="fa-solid fa-pen-to-square"></i> Nous Contacter</a></li>
-                        <li><a href="contact.html#sponsors"><i class="fa-solid fa-handshake"></i> Devenir Partenaire</a></li>
+                        <li><a href="contact.html#sponsors"><i class="fa-solid fa-handshake"></i> Devenir Partenaire</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -95,43 +100,91 @@
         </div>
     </div>
 
+    <!-- Small Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Entrons en Contact</h1>
+            <p>Une question ? Une proposition de partenariat ? Envoyez-nous un message et nous vous répondrons dans les
+                plus brefs délais.</p>
+        </div>
+    </section>
+
     <!-- Main Content Area -->
-    <main class="page-content">
-        <div class="app-container">
-            <div class="filters interaction">
-                <div class="search-wrapper">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="search" class="search-input" placeholder="Rechercher un pays...">
-                </div>
-                <!-- Custom Select pour Région -->
-                <div class="custom-select" id="select-region-container">
-                    <div class="select-trigger" id="select-region-trigger">
-                        <span>Trier par Régions</span>
-                        <i class="fa-solid fa-chevron-down"></i>
+    <main class="main-wrapper">
+        <div class="contact-layout">
+            <!-- Formulaire de contact -->
+            <div class="contact-card">
+                <h2>Envoyer un message</h2>
+                <form class="contact-form" id="contact-form"
+                    onsubmit="event.preventDefault(); alert('Message envoyé avec succès ! Nous vous répondrons très rapidement.'); this.reset();">
+                    <div class="form-group">
+                        <label for="name">Nom complet</label>
+                        <input type="text" id="name" class="form-input" placeholder="Ex: Jean Dupont" required
+                            autocomplete="name">
                     </div>
-                    <div class="select-options scrollable-options" id="select-region-options"></div>
-                </div>
-
-                <!-- Custom Select pour Langue -->
-                <div class="custom-select" id="select-language-container">
-                    <div class="select-trigger" id="select-language-trigger">
-                        <span>Trier par Langues</span>
-                        <i class="fa-solid fa-chevron-down"></i>
+                    <div class="form-group">
+                        <label for="email">Adresse e-mail</label>
+                        <input type="email" id="email" class="form-input" placeholder="Ex: jean.dupont@gmail.com"
+                            required autocomplete="email">
                     </div>
-                    <div class="select-options scrollable-options" id="select-language-options"></div>
-                </div>
-
-                <!-- Custom Select pour Population -->
-                <div class="custom-select" id="select-population-container">
-                    <div class="select-trigger" id="select-population-trigger">
-                        <span>Trier par Population</span>
-                        <i class="fa-solid fa-chevron-down"></i>
+                    <div class="form-group">
+                        <label for="subject">Sujet du message</label>
+                        <input type="text" id="subject" class="form-input"
+                            placeholder="Ex: Proposition de partenariat / Question" required>
                     </div>
-                    <div class="select-options scrollable-options" id="select-population-options"></div>
-                </div>
+                    <div class="form-group">
+                        <label for="message">Votre message</label>
+                        <textarea id="message" class="form-textarea" placeholder="Écrivez votre message ici..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <span>Envoyer</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
             </div>
 
-            <div id="countries" class="countries-container"></div>
+            <!-- Coordonnées & Sponsors -->
+            <div class="contact-sidebar">
+                <!-- Coordonnées -->
+                <div class="info-widget">
+                    <h3>Coordonnées</h3>
+                    <div class="info-details">
+                        <div class="info-item">
+                            <i class="fa-regular fa-envelope"></i>
+                            <div class="info-item-text">
+                                <h4>E-mail</h4>
+                                <p>caleb.kpanou@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <div class="info-item-text">
+                                <h4>WhatsApp Direct</h4>
+                                <p>+229 90 00 00 00</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div class="info-item-text">
+                                <h4>Localisation physique</h4>
+                                <p>Cotonou, République du Bénin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Partenaires & Sponsors -->
+                <div class="sponsors-showcase" id="sponsors">
+                    <h3>Nos Partenaires & Sponsors</h3>
+                    <div class="sponsors-grid">
+                        <div class="sponsor-logo-box"><i class="fa-solid fa-globe"></i> Atlas Global</div>
+                        <div class="sponsor-logo-box"><i class="fa-solid fa-map-location-dot"></i> Mapify</div>
+                        <div class="sponsor-logo-box"><i class="fa-solid fa-database"></i> REST API Inc.</div>
+                        <div class="sponsor-logo-box"><i class="fa-solid fa-graduation-cap"></i> EduSphere</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -143,9 +196,10 @@
                     <i class="fa-solid fa-earth-americas"></i>
                     <span>Geo<span>Genius</span></span>
                 </a>
-                <p>Un portail éducatif et d'informations géographiques pour découvrir la richesse et la diversité culturelle des nations qui partagent notre planète.</p>
+                <p>Un portail éducatif et d'informations géographiques pour découvrir la richesse et la diversité
+                    culturelle des nations qui partagent notre planète.</p>
             </div>
-            
+
             <div class="footer-links">
                 <h4>Plan du site</h4>
                 <ul>
@@ -159,13 +213,15 @@
             <div class="footer-contact">
                 <h4>Contact & Réseaux</h4>
                 <div class="footer-socials">
-                    <a href="https://wa.me/22990000000" target="_blank" class="social-link whatsapp" aria-label="WhatsApp">
+                    <a href="https://wa.me/22990000000" target="_blank" class="social-link whatsapp"
+                        aria-label="WhatsApp">
                         <i class="fa-brands fa-whatsapp"></i>
                     </a>
                     <a href="https://facebook.com" target="_blank" class="social-link facebook" aria-label="Facebook">
                         <i class="fa-brands fa-facebook-f"></i>
                     </a>
-                    <a href="https://instagram.com" target="_blank" class="social-link instagram" aria-label="Instagram">
+                    <a href="https://instagram.com" target="_blank" class="social-link instagram"
+                        aria-label="Instagram">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
                     <a href="mailto:caleb.kpanou@gmail.com" class="social-link gmail" aria-label="Gmail">
@@ -182,11 +238,8 @@
 
     <!-- GSAP Core Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Code JavaScript principal de navigation / menu -->
+    <!-- Code JavaScript principal -->
     <script src="./index.js"></script>
-    <!-- Code de l'explorateur -->
-    <script src="./countriesExplorer.js"></script>
 </body>
 
 </html>

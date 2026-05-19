@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explorateur des Nations - GeoGenius 🌍</title>
+    <title>À propos - GeoGenius 👥</title>
     <!-- Google Fonts - Outfit -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="./index.css">
-    <link rel="stylesheet" href="./countriesExplorer.css">
+    <link rel="stylesheet" href="./pages.css">
     <link rel="shortcut icon" href="./image.png" type="image/x-icon">
 </head>
 
@@ -30,7 +30,7 @@
             <nav class="desktop-nav">
                 <a href="index.html" class="nav-link">Accueil</a>
                 <a href="news.html" class="nav-link">Actualités</a>
-                <a href="about.html" class="nav-link">À propos</a>
+                <a href="about.html" class="nav-link active">À propos</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </nav>
 
@@ -95,44 +95,94 @@
         </div>
     </div>
 
+    <!-- Small Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Notre Identité</h1>
+            <p>Découvrez qui se cache derrière GeoGenius, notre mission éducative et l'organisation du projet.</p>
+        </div>
+    </section>
+
     <!-- Main Content Area -->
-    <main class="page-content">
-        <div class="app-container">
-            <div class="filters interaction">
-                <div class="search-wrapper">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="search" class="search-input" placeholder="Rechercher un pays...">
-                </div>
-                <!-- Custom Select pour Région -->
-                <div class="custom-select" id="select-region-container">
-                    <div class="select-trigger" id="select-region-trigger">
-                        <span>Trier par Régions</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="select-options scrollable-options" id="select-region-options"></div>
-                </div>
+    <main class="main-wrapper">
+        <!-- Présentation générale -->
+        <section class="about-grid" id="about-us">
+            <div class="about-text">
+                <h2>Qui sommes-nous ?</h2>
+                <p>GeoGenius est né d'une passion commune pour la cartographie, l'analyse démographique et la culture générale. Notre but est de fournir une interface visuelle simple, fluide et esthétique pour explorer instantanément les fiches de toutes les nations du monde.</p>
+                <p>À travers des données dynamiques (issues de l'API libre REST Countries), nous compilons les caractéristiques essentielles des territoires terrestres (langues parlées, populations, capitales, monnaies et géolocalisation) pour en faire un atlas interactif complet.</p>
+            </div>
+            <div class="about-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop" alt="Réseau global de la terre">
+            </div>
+        </section>
 
-                <!-- Custom Select pour Langue -->
-                <div class="custom-select" id="select-language-container">
-                    <div class="select-trigger" id="select-language-trigger">
-                        <span>Trier par Langues</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="select-options scrollable-options" id="select-language-options"></div>
+        <!-- Mission & Valeurs -->
+        <section class="values-section" id="mission">
+            <div class="section-header">
+                <span class="section-subtitle">Nos Piliers</span>
+                <h2>Notre Mission & Valeurs</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <h3>Éducation pour tous</h3>
+                    <p>Faciliter l'apprentissage de la géographie grâce à des outils visuels interactifs et ludiques, sans barrière d'accès.</p>
                 </div>
-
-                <!-- Custom Select pour Population -->
-                <div class="custom-select" id="select-population-container">
-                    <div class="select-trigger" id="select-population-trigger">
-                        <span>Trier par Population</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="select-options scrollable-options" id="select-population-options"></div>
+                <div class="value-card">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <h3>Diversité Culturelle</h3>
+                    <p>Mettre en avant les langues parlées, les monnaies locales et la souveraineté de chaque territoire répertorié sur le globe.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-code-fork"></i>
+                    <h3>Open Data & Source</h3>
+                    <p>Soutenir la communauté en utilisant des outils et API open-source pour garantir un accès universel aux données géographiques.</p>
                 </div>
             </div>
+        </section>
 
-            <div id="countries" class="countries-container"></div>
-        </div>
+        <!-- Organisation / Team -->
+        <section class="team-section" id="organisation">
+            <h2>Notre Organisation</h2>
+            <div class="team-grid">
+                <!-- Membre 1 -->
+                <div class="team-card">
+                    <div class="team-avatar-wrapper">
+                        👨‍💻
+                    </div>
+                    <div class="team-info">
+                        <h3>Caleb Kpanou</h3>
+                        <span>Créateur & Développeur Principal</span>
+                        <p>Passionné par les technologies web et la transmission des savoirs, il a orchestré l'architecture et les animations de GeoGenius.</p>
+                    </div>
+                </div>
+
+                <!-- Membre 2 -->
+                <div class="team-card">
+                    <div class="team-avatar-wrapper">
+                        🌐
+                    </div>
+                    <div class="team-info">
+                        <h3>REST Countries API</h3>
+                        <span>Fournisseur de Données</span>
+                        <p>L'API géographique universelle qui alimente en temps réel notre base de données sur les 250 pays et territoires.</p>
+                    </div>
+                </div>
+
+                <!-- Membre 3 -->
+                <div class="team-card">
+                    <div class="team-avatar-wrapper">
+                        ✨
+                    </div>
+                    <div class="team-info">
+                        <h3>GSAP Animations</h3>
+                        <span>Moteur Graphique</span>
+                        <p>La technologie GreenSock qui anime nos transitions fluides, nos parallaxes et les mouvements de notre univers visuel.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -182,11 +232,8 @@
 
     <!-- GSAP Core Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Code JavaScript principal de navigation / menu -->
+    <!-- Code JavaScript principal -->
     <script src="./index.js"></script>
-    <!-- Code de l'explorateur -->
-    <script src="./countriesExplorer.js"></script>
 </body>
 
 </html>

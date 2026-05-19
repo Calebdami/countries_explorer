@@ -37,30 +37,8 @@ body {
     background: radial-gradient(circle at 50% 0%, var(--bg-light) 0%, var(--bg-dark) 80%);
     color: var(--text-main);
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
     overflow-x: hidden;
     padding-bottom: 80px;
-}
-
-/* ==========================================================================
-   PAGE ENTRANCE TRANSITION
-   ========================================================================== */
-.page-transition-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-dark);
-    z-index: 9999;
-    opacity: 1;
-    pointer-events: none;
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-body.loaded .page-transition-overlay {
-    opacity: 0;
 }
 
 /* ==========================================================================
@@ -69,7 +47,7 @@ body.loaded .page-transition-overlay {
 .app-container {
     width: 90%;
     max-width: 1280px;
-    margin: 30px 0;
+    margin: 40px auto;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -406,90 +384,164 @@ body.loaded .page-transition-overlay {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(9, 12, 21, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(9, 12, 21, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    animation: fadeIn 0.3s forwards;
+    animation: fadeIn 0.4s forwards;
+    transition: opacity 0.4s ease;
 }
 
-/* Modificateur pour la carte clonée dans l'overlay */
-.overlay .overlay-card {
-    width: 480px;
+.overlay.closing {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.overlay-card {
+    position: relative;
+    width: 520px;
     max-width: 90%;
-    background: #111422; /* Fond sombre de la carte détaillée */
-    border-radius: 24px;
+    background: #111422; /* Fond sombre */
+    border-radius: var(--radius-lg);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    overflow: hidden;
     animation: slideUpModal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    cursor: default;
-    transform: scale(1) !important;
 }
 
-.overlay .overlay-card:hover {
-    transform: scale(1) !important;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-    border-color: var(--glass-border);
+.overlay.closing .overlay-card {
+    animation: slideDownModalExit 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.overlay .overlay-card img.image {
-    height: 240px;
+.overlay-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
     border-bottom: 1px solid var(--glass-border);
 }
 
-.overlay .overlay-card .details {
+.overlay-details {
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.overlay-details h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+.overlay-details h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: -8px;
+    margin-bottom: 10px;
+}
+
+.details-grid {
+    display: flex;
+    flex-direction: column;
     gap: 12px;
 }
 
-.overlay .overlay-card .details h1 {
-    font-size: 1.7rem;
-    color: var(--text-main);
-}
-
-.overlay .overlay-card .details h2 {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    border-bottom: 1.5px solid var(--glass-border);
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-bottom: 10px;
-    margin-bottom: 6px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
 }
 
-.overlay .overlay-card .details p {
+.detail-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detail-label {
     font-size: 0.95rem;
-    padding-bottom: 8px;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-label i {
+    color: var(--primary);
+    width: 16px;
+    text-align: center;
+}
+
+.detail-value {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    text-align: right;
+    max-width: 60%;
+}
+
+.maps-btn {
+    margin-top: 15px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, #3b7af0 100%);
+    border: none;
+    border-radius: var(--radius-md);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(79, 145, 255, 0.25);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.maps-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(79, 145, 255, 0.4);
+    background: linear-gradient(135deg, #5b9bff 0%, var(--primary) 100%);
+}
+
+.maps-btn:active {
+    transform: translateY(-0.5px);
 }
 
 /* Bouton Fermer */
 .close {
     position: absolute;
-    top: 24px;
-    right: 24px;
-    width: 44px;
-    height: 44px;
-    background: rgba(255, 255, 255, 0.05);
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(9, 12, 21, 0.7);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--text-main);
     cursor: pointer;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: var(--transition);
     user-select: none;
-    z-index: 10000;
+    z-index: 100;
 }
 
 .close:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.1);
     border-color: var(--glass-border-hover);
-    transform: rotate(90deg) scale(1.1);
+    transform: rotate(90deg) scale(1.05);
 }
 
 /* ==========================================================================
@@ -528,6 +580,26 @@ body.loaded .page-transition-overlay {
     }
     to {
         transform: translateY(0);
+    }
+}
+
+@keyframes slideDownModalExit {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+}
+
+@keyframes slideDownBottomSheetExit {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
     }
 }
 
@@ -607,36 +679,38 @@ body.loaded .page-transition-overlay {
         align-items: flex-end;
     }
 
-    .overlay .overlay-card {
+    .overlay-card {
         width: 100%;
         max-width: 100%;
         margin: 0;
         border-radius: 24px 24px 0 0;
         animation: slideUpBottomSheet 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        max-height: 80vh;
+        max-height: 85vh;
         overflow-y: auto;
-        background: #111422;
     }
 
-    .overlay .overlay-card img.image {
+    .overlay.closing .overlay-card {
+        animation: slideDownBottomSheetExit 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .overlay-image {
         height: 200px;
     }
 
-    .overlay .overlay-card .details {
-        padding: 20px;
-        gap: 10px;
+    .overlay-details {
+        padding: 24px;
+        padding-bottom: 40px; /* Espace tactile pour le scroll mobile */
+        gap: 12px;
     }
 
-    .overlay .overlay-card .details h1 {
-        font-size: 1.4rem;
+    .overlay-details h1 {
+        font-size: 1.5rem;
     }
 
     .close {
         top: 16px;
         right: 16px;
-        width: 38px;
-        height: 38px;
-        background: rgba(9, 12, 21, 0.8);
-        border: 1px solid var(--glass-border);
+        width: 36px;
+        height: 36px;
     }
 }

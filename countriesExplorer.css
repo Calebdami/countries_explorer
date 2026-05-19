@@ -45,9 +45,10 @@ body {
    CONTAINER PRINCIPAL & BLUR
    ========================================================================== */
 .app-container {
-    width: 90%;
-    max-width: 1280px;
+    width: 100%;
+    max-width: 1200px;
     margin: 40px auto;
+    padding: 0 30px;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -608,7 +609,8 @@ body {
    ========================================================================== */
 @media (max-width: 900px) {
     .app-container {
-        margin: 20px 0;
+        margin: 20px auto;
+        padding: 0 20px;
     }
 
     .header h1 {

@@ -1018,6 +1018,46 @@ body {
 }
 
 /* ==========================================================================
+   LOADING SKELETONS
+   ========================================================================== */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.02) 25%, 
+        rgba(255, 255, 255, 0.08) 37%, 
+        rgba(255, 255, 255, 0.02) 63%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.skeleton-text {
+    height: 12px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.skeleton-title {
+    height: 22px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 12px;
+    width: 80%;
+}
+
+.skeleton-featured {
+    pointer-events: none;
+}
+
+.skeleton-card {
+    pointer-events: none;
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
 @media (max-width: 1024px) {
@@ -1060,9 +1100,14 @@ body {
         font-size: 1.1rem;
     }
     
+    .header-container {
+        padding: 0 20px;
+    }
+    
     .footer-container {
         grid-template-columns: 1fr;
         gap: 40px;
+        padding: 0 20px 40px 20px;
     }
     
     .stats-grid {

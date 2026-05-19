@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoGenius - Culture Générale du Monde 🌍</title>
+    <!-- Google Fonts - Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="./index.css">
+    <link rel="shortcut icon" href="./image.png" type="image/x-icon">
+</head>
+<body>
+    <!-- Overlay de transition pour le changement de page -->
+    <div class="transition-overlay"></div>
+
+    <!-- Éléments d'arrière-plan interactifs (Drapeaux flottants animés) -->
+    <div class="floating-elements" id="floating-elements">
+        <div class="floating-item item-1">🇫🇷</div>
+        <div class="floating-item item-2">🇯🇵</div>
+        <div class="floating-item item-3">🇧🇷</div>
+        <div class="floating-item item-4">🇨🇦</div>
+        <div class="floating-item item-5">🇪🇬</div>
+        <div class="floating-item item-6">🇦🇺</div>
+        <div class="floating-item item-7">🇿🇦</div>
+        <div class="floating-item item-8">🇮🇳</div>
+    </div>
+
+    <!-- Conteneur principal de la Landing Page -->
+    <main class="landing-container">
+        <div class="glass-card">
+            <header class="logo-area">
+                <div class="globe-icon">
+                    <i class="fa-solid fa-earth-americas"></i>
+                </div>
+            </header>
+
+            <section class="content-area">
+                <h1 class="main-title" id="main-title">
+                    <span class="word">Geo</span><span class="word highlight">Genius</span>
+                </h1>
+                <p class="tagline">Explorez les nations du monde et testez vos connaissances.</p>
+                <p class="description">
+                    Découvrez des informations clés sur tous les pays : capitales, populations, langues parlées, géographie et monnaies grâce à notre explorateur interactif et intuitif.
+                </p>
+
+                <!-- Points forts de l'application -->
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Recherche Instantanée</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>Filtres Intelligents</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-expand"></i>
+                        <span>Détails Immersifs</span>
+                    </div>
+                </div>
+
+                <div class="cta-wrapper">
+                    <button class="cta-button" id="start-btn">
+                        <span>Commencer l'exploration</span>
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer de la Landing Page -->
+        <footer class="landing-footer">
+            <div class="footer-socials">
+                <a href="https://wa.me/22990000000" target="_blank" class="social-link whatsapp" aria-label="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank" class="social-link facebook" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="social-link instagram" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="mailto:caleb.kpanou@gmail.com" class="social-link gmail" aria-label="Gmail">
+                    <i class="fa-regular fa-envelope"></i>
+                </a>
+            </div>
+            <div class="footer-info">
+                <span class="info-tag"><i class="fa-solid fa-database"></i> API REST Countries</span>
+                <span class="info-tag"><i class="fa-solid fa-earth-americas"></i> 250 Pays</span>
+                <span class="info-tag"><i class="fa-solid fa-code"></i> GSAP & Outfit Font</span>
+            </div>
+            <p class="copyright">Développé par Caleb Kpanou &copy; 2026</p>
+        </footer>
+    </main>
+
+    <!-- GSAP Core Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Landing Page Logic -->
+    <script src="./index.js"></script>
+</body>
+</html>

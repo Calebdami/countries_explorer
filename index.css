@@ -1,0 +1,485 @@
+/* ==========================================================================
+   VARIABLES & GRAPHIC SYSTEM
+   ========================================================================== */
+:root {
+    --bg-dark: #090c15;
+    --bg-light: #161b30;
+    --primary: #4f91ff;
+    --primary-glow: rgba(79, 145, 255, 0.4);
+    --secondary: #00f2fe;
+    --secondary-glow: rgba(0, 242, 254, 0.3);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.07);
+    --glass-border-hover: rgba(255, 255, 255, 0.15);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --font-outfit: 'Outfit', sans-serif;
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-outfit);
+}
+
+body {
+    background: radial-gradient(circle at 50% 0%, var(--bg-light) 0%, var(--bg-dark) 80%);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto; /* Permet le défilement si le contenu dépasse */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 60px 0;
+}
+
+/* ==========================================================================
+   TRANSITION OVERLAY
+   ========================================================================== */
+.transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.transition-active .transition-overlay {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ==========================================================================
+   FLOATING ELEMENTS (FLAGS)
+   ========================================================================== */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-item {
+    position: absolute;
+    font-size: 3rem;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+    opacity: 0.7;
+    will-change: transform;
+}
+
+/* Positionnement initial des différents drapeaux */
+.item-1 { top: 12%; left: 10%; }
+.item-2 { top: 22%; right: 12%; }
+.item-3 { bottom: 15%; left: 15%; }
+.item-4 { bottom: 25%; right: 8%; }
+.item-5 { top: 40%; left: 5%; }
+.item-6 { top: 60%; right: 20%; }
+.item-7 { bottom: 40%; right: 4%; }
+.item-8 { top: 75%; left: 25%; }
+
+/* ==========================================================================
+   GLASS CONTAINER & CARD
+   ========================================================================== */
+.landing-container {
+    width: 90%;
+    max-width: 680px;
+    z-index: 10;
+    will-change: transform, opacity;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    padding: 50px 40px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Logo & Globe Icon */
+.globe-icon {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.8rem;
+    color: #fff;
+    box-shadow: 0 0 30px var(--primary-glow);
+    animation: pulseGlobe 4s ease-in-out infinite;
+}
+
+.globe-icon i {
+    animation: rotateGlobe 20s linear infinite;
+}
+
+/* Titles & Text */
+.main-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.word {
+    display: inline-block;
+}
+
+.word.highlight {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
+}
+
+.tagline {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-top: 10px;
+}
+
+.description {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 520px;
+    margin-top: 8px;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.feature-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 18px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: var(--transition);
+}
+
+.feature-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--glass-border-hover);
+    transform: translateY(-5px);
+}
+
+.feature-item i {
+    font-size: 1.4rem;
+    color: var(--secondary);
+}
+
+.feature-item span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* CTA BUTTON */
+.cta-wrapper {
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, var(--primary) 0%, #3b76e0 100%);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 16px 40px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 25px rgba(79, 145, 255, 0.35),
+                0 0 1px rgba(255, 255, 255, 0.5) inset;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(79, 145, 255, 0.5);
+    background: linear-gradient(135deg, #5b9bff 0%, var(--primary) 100%);
+}
+
+.cta-button:active {
+    transform: translateY(-1px);
+}
+
+.cta-button i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover i {
+    transform: translateX(5px);
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+@keyframes rotateGlobe {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlobe {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(79, 145, 255, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 45px rgba(0, 242, 254, 0.6);
+        transform: scale(1.03);
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (PHONE & TABLET)
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto; /* Permet le défilement sur les petits écrans au besoin */
+    }
+
+    .glass-card {
+        padding: 40px 25px;
+        gap: 25px;
+    }
+
+    .main-title {
+        font-size: 2.8rem;
+    }
+
+    .tagline {
+        font-size: 1.15rem;
+    }
+
+    .description {
+        font-size: 0.95rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .feature-item {
+        padding: 14px 6px;
+    }
+
+    .feature-item i {
+        font-size: 1.2rem;
+    }
+
+    .feature-item span {
+        font-size: 0.75rem;
+    }
+
+    .floating-item {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2.3rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur tout petit écran */
+        gap: 12px;
+    }
+
+    .feature-item {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 12px 20px;
+        gap: 15px;
+    }
+
+    .feature-item i {
+        font-size: 1.3rem;
+    }
+
+    .feature-item span {
+        font-size: 0.9rem;
+    }
+
+    .cta-button {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 25px;
+        font-size: 1rem;
+    }
+
+    .floating-item {
+        font-size: 1.8rem;
+    }
+
+    /* Masque certains drapeaux sur téléphone pour éviter le fouillis */
+    .item-5, .item-6, .item-7, .item-8 {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   LANDING FOOTER
+   ========================================================================== */
+.landing-footer {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    will-change: transform, opacity;
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-link {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+/* WhatsApp colors */
+.social-link.whatsapp:hover {
+    background: #25d366;
+    color: #fff;
+    border-color: #25d366;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+    transform: translateY(-4px);
+}
+
+/* Facebook colors */
+.social-link.facebook:hover {
+    background: #1877f2;
+    color: #fff;
+    border-color: #1877f2;
+    box-shadow: 0 0 20px rgba(24, 119, 242, 0.4);
+    transform: translateY(-4px);
+}
+
+/* Instagram colors */
+.social-link.instagram:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 0 20px rgba(220, 39, 67, 0.4);
+    transform: translateY(-4px);
+}
+
+/* Gmail colors */
+.social-link.gmail:hover {
+    background: #ea4335;
+    color: #fff;
+    border-color: #ea4335;
+    box-shadow: 0 0 20px rgba(234, 67, 53, 0.4);
+    transform: translateY(-4px);
+}
+
+.footer-info {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.info-tag {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.info-tag i {
+    font-size: 0.85rem;
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: #556075;
+    letter-spacing: 0.5px;
+}
+

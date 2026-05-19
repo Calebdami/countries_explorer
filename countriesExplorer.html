@@ -1,25 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries Explorer 🌍</title>
+    <!-- Google Fonts - Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./countriesExplorer.css">
     <link rel="shortcut icon" href="./image.png" type="image/x-icon">
-    <title>Countries Explorer</title>
 </head>
 
 <body>
+    <!-- Overlay de transition pour l'entrée sur cette page -->
+    <div class="page-transition-overlay"></div>
+
     <div class="app-container">
         <header class="header">
+            <a href="./index.html" class="back-btn" id="back-to-home">
+                <i class="fa-solid fa-chevron-left"></i> Accueil
+            </a>
             <h1>Countries Explorer 🌍</h1>
         </header>
 
         <div class="filters interaction">
-            <input type="text" id="search" class="search-input" placeholder="Search a country...">
-            <select name="region" id="region" class="select"></select>
-            <select name="language" id="language" class="select"></select>
-            <select name="population" id="population" class="select"></select>
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search" class="search-input" placeholder="Rechercher un pays...">
+            </div>
+            <!-- Custom Select pour Région -->
+            <div class="custom-select" id="select-region-container">
+                <div class="select-trigger" id="select-region-trigger">
+                    <span>Trier par Régions</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="select-options scrollable-options" id="select-region-options"></div>
+            </div>
+
+            <!-- Custom Select pour Langue -->
+            <div class="custom-select" id="select-language-container">
+                <div class="select-trigger" id="select-language-trigger">
+                    <span>Trier par Langues</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="select-options scrollable-options" id="select-language-options"></div>
+            </div>
+
+            <!-- Custom Select pour Population -->
+            <div class="custom-select" id="select-population-container">
+                <div class="select-trigger" id="select-population-trigger">
+                    <span>Trier par Population</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="select-options scrollable-options" id="select-population-options"></div>
+            </div>
         </div>
 
         <div id="countries" class="countries-container"></div>
